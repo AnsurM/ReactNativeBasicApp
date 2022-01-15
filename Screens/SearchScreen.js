@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getBusinesses } from "../apis/yelp";
 import SearchBox from "../Components/SearchBox";
@@ -22,6 +22,10 @@ export default function SearchScreen() {
 
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    onSearchApi();
+  }, []);
 
   return (
     <View style={styles.container}>
