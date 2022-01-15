@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import SearchScreen from "./SearchScreen";
 
 export default function HomeScreen() {
@@ -12,7 +12,6 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "#3EB489",
     flex: 1,
   },
 });

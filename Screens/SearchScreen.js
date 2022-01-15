@@ -1,31 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { getBusinesses } from "../apis/yelp";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import SearchBox from "../Components/SearchBox";
+import { useResults } from "../hooks/useResults";
 
 export default function SearchScreen() {
   const [term, setTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [results, setResults] = useState([]);
-
-  const onSearchApi = async () => {
-    setIsLoading(true);
-
-    const response = await getBusinesses({
-      term,
-      location: "san jose",
-    });
-
-    if (response.data?.businesses) setResults(response.data?.businesses);
-    else setErrorMessage("Something went wrong, please try later.");
-
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    onSearchApi();
-  }, []);
+  const [isLoading, errorMessage, results, onSearchApi] = useResults();
 
   return (
     <View style={styles.container}>
@@ -35,17 +15,15 @@ export default function SearchScreen() {
           placeholder={"What would you like to eat today?"}
           isLoading={isLoading}
           onChange={setTerm}
-          onSubmit={onSearchApi}
+          onSubmit={() => onSearchApi(term)}
         />
         {!!errorMessage.length && (
           <Text style={styles.errorMsg}>{errorMessage}</Text>
         )}
         {!!results.length && (
-          <TouchableOpacity onPress={() => setResults([])}>
-            <Text style={styles.resultsMsg}>
-              Search results: {results.length}
-            </Text>
-          </TouchableOpacity>
+          <Text style={styles.resultsMsg}>
+            Search results: {results.length}
+          </Text>
         )}
       </View>
       <View style={styles.resultContainer1}></View>
