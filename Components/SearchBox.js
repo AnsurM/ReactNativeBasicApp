@@ -18,6 +18,8 @@ export default function SearchBox({
       )}
       <TextInput
         editable={!isLoading}
+        autoCapitalize="none"
+        autoCorrect={false}
         style={styles.input}
         placeholder={placeholder}
         value={term}

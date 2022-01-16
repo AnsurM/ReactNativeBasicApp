@@ -5,6 +5,7 @@ import HomeScreen from "./Screens/HomeScreen";
 export default function App() {
   return (
     <View style={styles.appBody}>
+      <StatusBar hidden={false} />
       <View style={styles.container}>
         <HomeScreen />
       </View>
@@ -20,6 +21,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 40,
-    marginHorizontal: 5,
   },
 });
